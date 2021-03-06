@@ -1,0 +1,28 @@
+version: "3"
+services: 
+  app:
+    restart: always # For production
+    build: .
+    volumes: 
+      - ".:/app"
+    container_name: node_test
+    image: node_test
+    depends_on:
+      - mongo-1      
+    command: 
+      [
+        "sh",
+        "-c",
+        "ls && npm install && npm run dev",
+      ]
+    environment:
+      - "PORT=3030" #change environment variable for production
+    ports:
+      - "3030:3030" #change Port fo production such as 3030
+  mongo-1:
+    container_name: mongo
+    image: mongo:4
+    ports: 
+      - "27037:27017"
+    volumes:
+      - ./db:/data/db

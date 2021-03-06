@@ -1,0 +1,58 @@
+[
+    {
+        "path": "/posts",
+        "method": "post",
+        "isAdmin": false,
+        "title": "insert a post",
+        "group": "post"
+    },
+    {
+        "path": "/posts/:id",
+        "method": "patch",
+        "isAdmin": false,
+        "title": "update a post",
+        "group": "patch"
+    },
+    {
+        "path": "/posts",
+        "method": "get",
+        "isAdmin": false,
+        "title": "get all post",
+        "group": "post"
+    },
+    {
+        "path": "/posts/:id",
+        "method": "delete",
+        "isAdmin": false,
+        "title": "delete a post",
+        "group": "post"
+    },
+    {
+        "path": "/posts/:id",
+        "method": "get",
+        "isAdmin": false,
+        "title": "get a post",
+        "group": "post"
+    },
+    {
+        "path": "/users/:id",
+        "method": "get",
+        "isAdmin": false,
+        "title": "insert a post",
+        "group": "post"
+    },
+    {
+        "path": "/users/:id",
+        "method": "patch",
+        "isAdmin": false,
+        "title": "insert a post",
+        "group": "post"
+    },
+    {
+        "path": "/users",
+        "method": "post",
+        "isAdmin": false,
+        "title": "insert a post",
+        "group": "post"
+    }
+]
