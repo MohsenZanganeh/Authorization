@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Role = sequelize.define('Route', {
+  const Route = sequelize.define('route', {
     id: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }, 
     method: {
-      type: Sequelize.ENUM("get", "post", "delete", "patch", "put"),
+      type: DataTypes.ENUM("get", "post", "delete", "patch", "put"),
       allowNull: false
     }, 
     isAdmin: {
@@ -32,9 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     version: true,
     paranoid:true
   });
-  Role.associate = function (models) {
-    models.Role.hasMany(models.Permission)
-    models.Permission.belongsTo(models.Role)
-  };
-  return Role;
+
+
+  return Route;
 }

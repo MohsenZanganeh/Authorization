@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const Permission = sequelize.define('Permission', {
+    const Permission = sequelize.define('permission', {
         id: {
             type: DataTypes.BIGINT,
             allowNull: false,
@@ -9,10 +9,6 @@ module.exports = (sequelize, DataTypes) => {
             field: 'id'
         },
         title: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        routes: {
             type: DataTypes.STRING,
             allowNull: false
         },

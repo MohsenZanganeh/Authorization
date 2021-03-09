@@ -1,8 +1,8 @@
 const express = require("express");
 const route = express();
-const {update,get} = require('./index')
+const {patch,get} = require('./index')
 
 route.get("/users/:id", get);
-route.patch("/users/:id", update);
+route.patch("/users/:id", patch);
 
 module.exports = route;

@@ -1,4 +1,4 @@
-const User = require("../../database/model/userModel");
+const { user } = require("../../database/model/index");
 const passport = require("passport");
 var JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
@@ -12,11 +12,9 @@ opts.audience = 'casl.io';
 
 
 passport.use(
-  new JwtStrategy(opts, function (req, done) {
-    User.findOne({ email: req.user.email }, function (err, result) {
-      if (err) {
-        return done(err, false);
-      }
+  new JwtStrategy(opts,async function (req, done) {
+   const result = await user.findOne({ email: req.user.email });
+
       if (!result) {
         return done(null, false, { message: "Incorrect username." });
       }
@@ -24,7 +22,7 @@ passport.use(
       //   return done(null, false, { message: 'Incorrect password.' });
       // }
       return done(null, result);
-    });
+
   })
 );
 

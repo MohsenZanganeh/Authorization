@@ -8,7 +8,7 @@ services:
     container_name: node_test
     image: node_test
     depends_on:
-      - mongo-1      
+      - postgres      
     command: 
       [
         "sh",
@@ -19,10 +19,13 @@ services:
       - "PORT=3030" #change environment variable for production
     ports:
       - "3030:3030" #change Port fo production such as 3030
-  mongo-1:
-    container_name: mongo
-    image: mongo:4
+  postgres:
+    container_name: postgres
+    image: postgres:9.5
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
     ports: 
-      - "27037:27017"
+      - "5432:5432"
     volumes:
-      - ./db:/data/db
+      - ./tmp/db:/var/lib/postgresql/data

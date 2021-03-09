@@ -1,8 +1,8 @@
-const { editUseCase } = require("../../services/userUseCase");
+const updateUserUseCase = require("../../services/user/updateUserUseCase");
 
-async function update(req, res) {
-  const user = await editUseCase(req, res);
-  res.status(201).send(user);
+async function patch(req, res) {
+  const token = await updateUserUseCase.execute(req, res);
+  res.status(200).send(token);
 }
 
-module.exports = update;
+module.exports = patch;

@@ -1,6 +1,7 @@
-const patch = require('./patch')
+const post = require('./post')
 const get = require('./get')
+
 module.exports = {
-    patch,
+    post,
     get
 }

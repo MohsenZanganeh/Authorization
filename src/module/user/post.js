@@ -1,10 +1,9 @@
-const {createUseCase} = require('../../services/userUseCase');
-
+const registerUserUseCase = require("../../services/user/registerUserUseCase");
 
 async function post(req, res) {
-   const user = await createUseCase(req,res)
+  const user = await registerUserUseCase.execute(req, res);
 
   res.status(201).send(user);
 }
 
-module.exports =post;
+module.exports = post;
