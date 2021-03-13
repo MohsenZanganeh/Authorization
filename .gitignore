@@ -8,7 +8,7 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
-db
+db/
 # Other files and folders
 .settings/
 
