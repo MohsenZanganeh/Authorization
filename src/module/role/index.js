@@ -1,9 +1,8 @@
 const post = require('./post')
 const get = require('./get')
-const patch = require('./patch')
-
+const addRoleToUserController = require('./addRoleToUserController')
 module.exports = {
     post,
     get,
-    patch
+    addRoleToUserController,
 }

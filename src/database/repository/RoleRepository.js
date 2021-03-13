@@ -1,33 +1,41 @@
-const { role,permission,user } = require("../model/index");
+const { role, permission, user } = require("../model/index");
 class RoleRepository {
-  constructor() {  }
+  constructor() {}
   create = async (data) => {
-    console.log('--data:',data);
     const Role = await role.create(data);
-  
-    return Role;
-  }; 
-  update = async (param,data) => {
-    const Role = await role.update(param,data);
-    const Permission = await permission.findOne({ where: { id: data.permissionId } });
-    if (Permission) {
-      await permission.addRole(Role);
-    }
+
     return Role;
   };
+  update = async (param, data) => {
+    const Role = await role.update(param, data);
+
+    return Role;
+  };
+  assignToUser = async (param, data) => {
+    const Role = await role.findOne(data, { where: param });
+    const User = await user.findOne({ where: { id: data.userId } });
+    if (User && Role) {
+      await User.addRole(Role);
+      return Role;
+    }
+    return {};
+  };
   findOne = async (data, join = false) => {
-    let criteria = {where:data}
+    let criteria = { where: data };
     if (join) {
-      criteria  = {...criteria,include: [{ model: permission }]}
+      criteria = {
+        include: [{ model: permission }, { model: user,where:data }],
+      };
     }
     const Role = await role.findOne(criteria);
     return Role;
   };
-  findAll = async (data,join = false) => {
-    let criteria = {where:data}
+  findAll = async (data, join = false) => {
+    let criteria = { where: data };
     if (join) {
-      criteria  = {...criteria,include: [{ model: permission }]}
+      criteria = { include: [{ model: permission }, { model: user,where:data }]};
     }
+    console.log("--criteria:", JSON.stringify(criteria));
     const Role = await role.findAll(criteria);
     return Role;
   };

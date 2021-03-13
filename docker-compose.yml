@@ -29,3 +29,9 @@ services:
       - "5432:5432"
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
+  redis:
+    container_name: redis
+    image: redis:5.0.8
+    restart: always
+    ports:
+      - "1079:6379"

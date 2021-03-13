@@ -6,7 +6,7 @@ class LoginUseCase {
   async execute(req, res) {
     const user = await loginUser(req.body);
     if (user) {
-      const token = createToken(user, req);
+      const token = createToken(req,res,user);
       return token;
     }
   }

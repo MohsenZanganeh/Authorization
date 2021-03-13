@@ -3,7 +3,7 @@ const userRoute = require('./src/module/user/route')
 const routeRoute = require('./src/module/route/route')
 const roleRoute = require('./src/module/role/route')
 const permissionRoute = require('./src/module/permission/route')
-
+const cache = require('./src/utils/cache')
 const jwtServices = require('./src/module/auth/index')
 const login  = require('./src/module/user/login'),
       create = require('./src/module/user/post')
@@ -31,7 +31,7 @@ app.use(userRoute)
 app.use(routeRoute)
 app.use(roleRoute)
 app.use(permissionRoute)
-
+cache.connect();
 db.sequelize.sync({}).then(() => {
     console.log("Connect To DataBase.....")
 }).catch((ex) => {

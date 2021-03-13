@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     }, 
+    namePath: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    }, 
     group: {
       type: DataTypes.STRING,
       allowNull: false

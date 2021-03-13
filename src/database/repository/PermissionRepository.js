@@ -1,4 +1,4 @@
-const { permission, route } = require("../model/index");
+const { permission,route, role } = require("../model/index");
 class PermissionRepository {
   constructor() {}
   create = async (data) => {
@@ -8,6 +8,17 @@ class PermissionRepository {
       await Route.addPermission(Permission);
     }
     return Permission;
+  };
+
+  assignPermission = async (param, data) => {
+    const Permission = await permission.findOne({ where: { id: param.id } });
+    const Role = await role.findOne(data, { where: data.roleId });
+
+    if (Permission && Role) {
+      await Role.addPermission(Permission);
+      return Role;
+    }
+    return {}
   };
   findOne = async (data, join = false) => {
     let criteria = {where:data}

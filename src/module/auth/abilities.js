@@ -1,23 +1,21 @@
-const { AbilityBuilder, Ability } = require('@casl/ability');
+const roleRepository = require("../../database/repository/RoleRepository");
+const permissionRepository = require("../../database/repository/PermissionRepository");
+const cache = require("../../utils/cache");
 
-function defineAbilitiesFor(user) {
-  const { rules, can } = AbilityBuilder.extract();
-
-  can('read', ['Post', 'Comment']);
-  can('create', 'User');
-
+module.exports = async function createAbilities(user) {
+  const role = await roleRepository.findAll({ id: user.id }, true);
   if (user) {
-    can(['create', 'delete'], ['Post', 'Comment'], { author: user._id });
-    can(['read', 'aa'], 'User', { _id: user.id },);
+    let query = {};
+    role.forEach((element) => {
+      element.dataValues.permissions.forEach((permission) => {
+        query = { ...query, id: Number(permission.id) };
+      });
+    });
+    const permissions = await permissionRepository.findAll(query, true);
+    permissions.forEach((permission) => {
+      permission.routes.forEach((route) => {
+        cache.hset(`${route.path}-${route.method}`, user.id, 1);
+      });
+    });
   }
-
-  return new Ability(rules);
-}
-
-const ANONYMOUS_ABILITY = defineAbilitiesFor(null);
-
-module.exports = function createAbilities(req, res, next) {
-  console.log('----createAbilities----');
-  // req.ability = req.user.email ? defineAbilitiesFor(req.user) : ANONYMOUS_ABILITY;
-  next();
 };
