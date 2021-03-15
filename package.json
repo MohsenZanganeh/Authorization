@@ -34,6 +34,6 @@
     "dev": "nodemon -L app.js",
     "lint": "eslint --fix src/"
   },
-  "author": "Sergii Stotskyi <sergiy.stotskiy@freaksidea.com>",
+  "author": "Mohsen Zanganeh",
   "license": "MIT"
 }
